@@ -36,7 +36,7 @@ yarn.lock
 # docs
 Firefly-docs/
 
-# lite 版本
+# lite build
 Firefly-Lite/
 
 cache/
@@ -48,6 +48,6 @@ package/
 .claude
 .mimocode
 
-# 由 scripts/sync-notes.ts 从笔记仓库生成，不要手动编辑
+# Generated from the notes repo by scripts/sync-notes.ts - do not edit by hand
 src/content/posts/notes/
 .notes/

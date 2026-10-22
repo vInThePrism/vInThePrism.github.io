@@ -2,335 +2,335 @@ import type { SiteConfig } from "@/types/siteConfig";
 import { resolvePageToggles } from "../utils/page-toggle-utils";
 import { resolveSiteLang } from "../utils/site-config-utils";
 
-// 定义站点语言
-// 语言代码，例如：'zh_CN', 'zh_TW', 'en', 'ja', 'ru', 'ko'。
+// Site language
+// Language code, e.g. 'zh_CN', 'zh_TW', 'en', 'ja', 'ru', 'ko'.
 const SITE_LANG = resolveSiteLang("en");
 
-// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
+// Page switches - false returns a 404 and hides the matching navbar item
 const pages = resolvePageToggles({
-	// ── 社交 (Social) ──────────────────────────────────
+	// ── Social ──────────────────────────────────
 
-	// 友链页面开关
+	// Friend links page
 	friends: false,
-	// 留言板页面开关，需要配置评论系统
+	// Guestbook page (requires a comment system)
 	guestbook: false,
 
-	// ── 我的 (My) ──────────────────────────────────
+	// ── Mine ──────────────────────────────────
 
-	// 动态页面开关
+	// Updates page
 	dynamic: true,
-	// 项目展示页开关
+	// Projects page
 	projects: true,
-	// 相册页面开关
+	// Gallery page
 	gallery: true,
-	// 书签导航页面开关
+	// Bookmarks page
 	booknav: false,
-	// 哔哩哔哩追番页面开关
+	// Bilibili anime page
 	bilibili: false,
-	// 番组计划页面开关
+	// Bangumi page
 	bangumi: false,
-	// VNDB页面开关
+	// VNDB page
 	vndb: false,
-	// MyAnimeList页面开关
+	// MyAnimeList page
 	mal: false,
 
-	// ── 关于 (About) ──────────────────────────────────
+	// ── About ──────────────────────────────────
 
-	// 打赏页面开关
+	// Sponsor page
 	sponsor: false,
 });
 
 export const siteConfig: SiteConfig = {
-	// 站点标题
+	// Site title
 	title: "vInThePrism",
 
-	// 站点副标题
+	// Site subtitle
 	subtitle: "AI Infra · GPU · Life",
 
-	// 站点 URL
+	// Site URL
 	site_url: "https://vintheprism.github.io",
 
-	// 站点描述
+	// Site description
 	description:
 		"V's personal site: notes on GPU kernels and AI infra training performance, plus thoughts and everyday life.",
 
-	// 站点关键词
+	// Site keywords
 	keywords: ["vInThePrism", "CUDA", "GPU", "AI Infra", "notes", "blog"],
 
-	// 主题色
+	// Theme color
 	themeColor: {
-		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
+		// Default hue, 0-360. e.g. red 0, cyan 200, blue-violet 250, pink 345
 		hue: 345,
-		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
+		// Default mode: "light", "dark" or "system"
 		defaultMode: "system",
 	},
 
-	// 页面整体宽度（单位：rem）
-	// 数值越大可以让页面内容区域更宽
-	// 在使用单侧栏边栏时，建议调低一些宽度以获得更好的视觉效果。
+	// Overall page width (rem)
+	// Larger values make the content area wider
+	// With a single sidebar, a slightly smaller width tends to look better.
 	pageWidth: 90,
 
-	// 网站Card样式配置
+	// Card style
 	card: {
-		// 是否开启卡片边框和阴影，开启后让网站更有立体感
+		// Card borders and shadows (adds depth)
 		border: false,
-		// 是否让卡片风格跟随主题色相
+		// Tint cards with the theme hue
 		followTheme: false,
 	},
 
-	// Favicon 配置
-	// 如果启用了OpenGraph图片功能，数组中需要包含png格式的favicon图标
+	// Favicon
+	// If OpenGraph image generation is on, include a PNG favicon in this list
 	favicon: [
 		{
-			// 图标文件路径
-			src: "/favicon/firefly-32.png",
-			// 可选，指定主题 'light' | 'dark'
+			// Icon file path
+			src: "/favicon/vintheprism-32.png",
+			// Optional: theme, 'light' | 'dark'
 			// theme: "light",
-			// 可选，图标大小
+			// Optional: icon size
 			// sizes: "32x32",
 		},
 	],
 
-	// 导航栏配置
+	// Navbar
 	navbar: {
-		// 导航栏Logo
-		// 支持三种类型：
-		// 1. Astro图标库: { type: "icon", value: "material-symbols:home-pin-outline" }
-		// 2. 本地图片（public目录，不优化）: { type: "image", value: "/assets/images/logo.webp", alt: "Logo" }
-		// 3. 本地图片（src目录，自动优化但会增加构建时间）: { type: "image", value: "assets/images/logo.webp", alt: "Logo" }
-		// 4. 网络图片: { type: "url", value: "https://example.com/logo.png", alt: "Logo" }
-		// image 和 url 类型可额外设置 valueDark，用于暗色模式下显示另一张图片，不设置则亮暗色共用 value
-		// 例如: { type: "image", value: "assets/images/logo.png", valueDark: "assets/images/logo-dark.png", alt: "Logo" }
-		// 使用 Astro 图标库时不需要设置 valueDark，图标会自动跟随主题亮暗色切换
+		// Navbar logo
+		// Four kinds are supported:
+		// 1. Astro icon: { type: "icon", value: "material-symbols:home-pin-outline" }
+		// 2. Image in public/ (not optimized): { type: "image", value: "/assets/images/logo.webp", alt: "Logo" }
+		// 3. Image in src/ (optimized, slower builds): { type: "image", value: "assets/images/logo.webp", alt: "Logo" }
+		// 4. Remote image: { type: "url", value: "https://example.com/logo.png", alt: "Logo" }
+		// image and url logos can set valueDark for dark mode; otherwise value is used in both modes
+		// e.g. { type: "image", value: "assets/images/logo.png", valueDark: "assets/images/logo-dark.png", alt: "Logo" }
+		// Icons switch with light/dark mode automatically, so they don't need valueDark
 		logo: {
 			type: "icon",
 			value: "material-symbols:diamond-outline-rounded",
 		},
-		// 导航栏标题
+		// Navbar title
 		title: "vInThePrism",
-		// 全宽导航栏，导航栏是否占满屏幕宽度
+		// Full-width navbar
 		widthFull: false,
-		// 导航菜单对齐方式，left：左对齐，center：居中
+		// Menu alignment: left or center
 		menuAlign: "center",
-		// 导航栏图标和标题是否跟随主题色
+		// Tint the navbar icon and title with the theme color
 		followTheme: false,
-		// 导航栏模式navbarMode：
-		// "static"：不固定，随页面滚动消失
-		// "fixed"：固定在顶部常显
-		// "dynamic"：固定在顶部，下滑隐藏、轻微上滑显示
+		// navbarMode:
+		// "static": not pinned; scrolls away with the page
+		// "fixed": always pinned to the top
+		// "dynamic": pinned to the top; hides when scrolling down, shows when scrolling up
 		navbarMode: "dynamic",
 	},
 
-	// 站点开始日期，用于统计运行天数
+	// Site start date, used for the uptime counter
 	siteStartDate: "2026-10-22",
 
-	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
-	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
+	// Site time zone (IANA string), used to format dates in RSS, Bangumi, etc.
+	// e.g. "Asia/Shanghai", "UTC"; if empty, the build server's time zone is used
 	timezone: "UTC",
 
-	// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
+	// Page switches - false returns a 404 and hides the matching navbar item
 
-	// 分类导航栏开关，在首页和归档页顶部显示分类快捷导航
+	// Category bar: quick category links at the top of the home and archive pages
 	categoryBar: true,
 
-	// 分类导航栏按钮样式
-	// "pill"：胶囊，主题色浅底圆角
-	// "rectangle"：矩形，配色同胶囊，仅圆角更小
+	// Category bar button style
+	// "pill": rounded, light theme-colored background
+	// "rectangle": same colors as pill, smaller corner radius
 	categoryStyle: "rectangle",
 
-	// 标签样式，作用于文章列表底部标签、标签页和侧边栏标签
-	// "pill"：胶囊，主题色底圆角
-	// "pill-gray"：胶囊，中性灰底圆角
-	// "rectangle"：矩形，主题色底小圆角
+	// Tag style (post list, tags page and sidebar)
+	// "pill": rounded, theme-colored background
+	// "pill-gray": rounded, neutral gray background
+	// "rectangle": theme-colored background, small corner radius
 	tagStyle: "pill",
 
-	// 归档页是否折叠非最新年份文章，禁用后默认展开全部年份
+	// Collapse older years on the archive page; when off, every year is expanded
 	foldArticle: true,
 
-	// ── 文章列表布局配置 ──────────────────────────────────
+	// ── Post list layout ──────────────────────────────────
 	postListLayout: {
-		// 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（多列布局）
+		// Default layout: "list" (single column) or "grid" (multiple columns)
 		defaultMode: "list",
-		// 移动端默认布局模式，不设置则跟随 defaultMode
+		// Default layout on mobile; follows defaultMode if unset
 		mobileDefaultMode: "list",
-		// 列表模式下封面图显示在哪一侧："right" 右侧，"left" 左侧
-		// 网格模式的封面固定在卡片顶部，不受此项影响
+		// Cover position in list mode: "right" or "left"
+		// In grid mode the cover is always at the top of the card
 		coverPosition: "right",
-		// 文章简介显示行数，设为 0 则不截断
+		// Lines of description to show; 0 means no truncation
 		descriptionLines: 2,
-		// 文章卡片底部统计和发布日期是否显示图标
+		// Show icons next to stats and dates at the bottom of post cards
 		showStatsIcons: true,
-		// 标签显示位置
-		// 设置为"meta"：显示在文章标题下的元数据
-		// 设置为"bottom"：顶替stats在底部显示
+		// Where tags are shown
+		// "meta": in the metadata under the title
+		// "bottom": at the bottom, replacing the stats
 		tagsPosition: "bottom",
-		// 底部标签样式，仅在 tagsPosition 为 "bottom" 时生效
-		// "chip"：按钮样式，形状跟随上方的 tagStyle 配置
-		// "text"：无底色，只有文字
+		// Bottom tag style (only when tagsPosition is "bottom")
+		// "chip": button style, shape follows tagStyle above
+		// "text": plain text, no background
 		tagsBottomStyle: "chip",
-		// PostMeta 元数据显示控制
+		// PostMeta (metadata under the title)
 		meta: {
-			// 是否显示发布日期
+			// Show the publish date
 			showPublished: true,
-			// 是否显示分类
+			// Show the category
 			showCategory: true,
-			// 是否显示标签
+			// Show tags
 			showTags: true,
-			// 标签数量，设为 0 则不限制
+			// Number of tags; 0 means no limit
 			tagCount: 3,
-			// 是否显示字数
+			// Show word count
 			showWords: false,
-			// 是否显示阅读时间
+			// Show reading time
 			showReadingTime: false,
 		},
-		// 底部 PostStats 统计信息显示控制
-		// 如果tagsPosition设置为"bottom"，则stats将不显示
+		// PostStats (bottom of the card)
+		// Not shown when tagsPosition is "bottom"
 		stats: {
-			// 是否显示发布日期
+			// Show the publish date
 			showPublished: true,
-			// 是否显示字数
+			// Show word count
 			showWords: true,
-			// 是否显示阅读时间
+			// Show reading time
 			showReadingTime: true,
 		},
-		// 网格布局配置，仅在 defaultMode 为 "grid" 或允许切换布局时生效
+		// Grid layout (applies when defaultMode is "grid" or the layout can be switched)
 		grid: {
-			// 是否开启瀑布流布局，同时有封面图和无封面图的混合文章推荐开启
+			// Masonry layout; recommended when some posts have covers and some don't
 			masonry: false,
-			// 网格模式卡片最小宽度(px)，浏览器根据容器宽度自动计算列数
+			// Minimum card width in grid mode (px); the browser picks the column count
 			columnWidth: 320,
-			// 网格模式封面是否撑满卡片贴边
-			// true：封面顶到卡片左右和上边缘，只有上面两角是圆角
-			// false：封面按卡片内边距内缩，上、左、右留出间距，四角都是圆角
+			// Make grid covers bleed to the card edges
+			// true: cover touches the left, right and top edges; only the top corners are rounded
+			// false: cover is inset by the card padding; all four corners are rounded
 			coverFullWidth: false,
 		},
 	},
 
-	// 分页配置
+	// Pagination
 	pagination: {
-		// 每页显示的文章数量
+		// Posts per page
 		postsPerPage: 10,
 	},
 
-	// ── 文章内容页配置 ──────────────────────────────────
+	// ── Post page ──────────────────────────────────
 	post: {
-		// 提醒框（Admonitions）配置，修改后需要重启开发服务器才能生效
-		// 主题：'github' | 'obsidian' | 'vitepress' | 'docusaurus'，每个主题风格和语法不同，可根据喜好选择
+		// Callouts (admonitions); restart the dev server after changing this
+		// Theme: 'github' | 'obsidian' | 'vitepress' | 'docusaurus' - each has its own look and syntax
 		rehypeCallouts: {
 			theme: "github",
-			// 是否启用兼容 Python-Markdown 风格的 admonition 语法（!!!和???语法）
-			// 注意：只有 theme 配置成 obsidian 主题才能基本支持这些语法，其他主题会有样式问题或不兼容的情况
+			// Support Python-Markdown admonition syntax (!!! and ???)
+			// Note: only the obsidian theme supports this reasonably; other themes may render it incorrectly
 			enablePythonMarkdownAdmonitions: false,
 		},
-		// 文章页底部的"上次编辑时间"卡片开关
+		// "Last edited" card at the bottom of posts
 		showLastModified: true,
-		// 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
+		// Only show the "last edited" card for posts older than this many days
 		outdatedThreshold: 30,
-		// 是否显示文章页的分享按钮
+		// Show the share button on posts
 		share: true,
-		// 是否显示上一篇/下一篇文章导航
+		// Show previous/next post navigation
 		postNavigation: true,
-		// 是否显示相关文章推荐
+		// Show related posts
 		relatedPosts: true,
-		// 是否显示随机文章推荐
+		// Show random post suggestions
 		randomPosts: true,
-		// OpenGraph图片功能，注意开启后要渲染很长时间，不建议本地调试的时候开启
+		// Generate OpenGraph images (slow to render; not recommended for local development)
 		generateOgImages: false,
-		// 沉浸阅读配置：电脑端文章详情页右下角按钮，进入后只留文章卡片+左侧目录
+		// Immersive reading: a button at the bottom right of posts on desktop that leaves only the post card and the TOC
 		immersiveReading: {
-			// 总开关：false 则不显示按钮
+			// Master switch; false hides the button
 			enable: true,
-			// 进入文章页是否默认开启沉浸阅读
+			// Turn immersive reading on by default when opening a post
 			defaultOn: false,
-			// 沉浸阅读中是否显示目录栏
+			// Show the TOC in immersive reading
 			tocEnabled: true,
-			// 目录栏位置："left" | "right"
+			// TOC position: "left" | "right"
 			tocPosition: "left",
 		},
 	},
 
-	// ── Bilibili配置 ──────────────────────────────────
+	// ── Bilibili ──────────────────────────────────
 	bilibili: {
-		// 你的 Bilibili 用户 UID
+		// Your Bilibili user UID
 		uid: "38932988",
 	},
 
-	// ── 番组计划bangumi配置 ──────────────────────────────────
+	// ── Bangumi ──────────────────────────────────
 	bangumi: {
-		// Bangumi用户ID
+		// Bangumi user ID
 		userId: "1143164",
-		// 数据模式：static=构建时获取，dynamic=客户端实时获取
-		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
-		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
+		// Data mode: static = fetched at build time, dynamic = fetched live in the browser
+		// static renders at build time; data doesn't update after deployment
+		// dynamic calls the API from the browser and always shows the latest data
 		mode: "dynamic",
-		// Bangumi API 地址
+		// Bangumi API URL
 		apiUrl: "https://api.bangumi.pro",
-		// 详情页地址
+		// Detail page URL
 		subjectBaseUrl: "https://api.bangumi.pro/subject/",
-		// 条目类型排序，数组中的类型将按顺序优先展示
-		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
-		// 未列出的类型将按默认顺序排在后面
+		// Category order; listed types are shown first, in this order
+		// Values: "anime" | "book" | "music" | "game" | "real" ("real" is not supported yet)
+		// Unlisted types follow in the default order
 		categoryOrder: ["anime", "book", "music", "game"],
-		// 控制各分类的启用状态（true/false），未指定的分类默认启用
+		// Enable/disable individual categories (true/false); unlisted categories are enabled
 		// categories: {
-		// 	game: false, // 禁用游戏分类显示
+		// 	game: false, // hide games
 		// },
-		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
+		// NSFW handling: "off" no filtering | "blur" blur covers | "hide" hide entries
 		nsfw: "hide",
 	},
 
-	// ── VNDB配置 ──────────────────────────────────
+	// ── VNDB ──────────────────────────────────
 	vndb: {
-		// VNDB 用户 ID
+		// VNDB user ID
 		userId: "u358128",
-		// 数据模式：static=构建时获取，dynamic=客户端实时获取
-		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
-		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
+		// Data mode: static = fetched at build time, dynamic = fetched live in the browser
+		// static renders at build time; data doesn't update after deployment
+		// dynamic calls the API from the browser and always shows the latest data
 		mode: "static",
-		// 构建时下载并压缩封面到 public/vndb-covers，图片由本站服务器提供
+		// Download and compress covers into public/vndb-covers at build time and serve them from this site
 		downloadCovers: false,
-		// VNDB API 地址
+		// VNDB API URL
 		apiUrl: "https://api.vndb.org/kana",
-		// 条目详情页地址，末尾需要带 /
+		// Entry detail URL (must end with /)
 		vnBaseUrl: "https://vndb.org/",
-		// 私密列表访问令牌，仅 static 模式下使用；不要把真实令牌提交到公开仓库！
+		// Token for private lists (static mode only). Never commit a real token to a public repo!
 		apiToken: "",
-		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
+		// NSFW handling: "off" no filtering | "blur" blur covers | "hide" hide entries
 		nsfw: "hide",
 	},
 
-	// ── MyAnimeList配置 ──────────────────────────────────
+	// ── MyAnimeList ──────────────────────────────────
 	mal: {
-		// MyAnimeList 用户名（列表需为公开状态，私密列表无法读取）
+		// MyAnimeList username (the list must be public)
 		username: "cuteleaf",
-		// MyAnimeList Client ID，在 https://myanimelist.net/apiconfig 注册免费应用后获取
+		// MyAnimeList Client ID; register a free app at https://myanimelist.net/apiconfig
 		clientId: "	0ef34371450f9c6c809deaadec6aa8f3",
-		// MAL API 地址
+		// MAL API URL
 		apiUrl: "https://api.myanimelist.net/v2",
-		// 动画条目详情页地址，末尾需要带 /
+		// Anime detail URL (must end with /)
 		animeBaseUrl: "https://myanimelist.net/anime/",
-		// 漫画条目详情页地址，末尾需要带 /
+		// Manga detail URL (must end with /)
 		mangaBaseUrl: "https://myanimelist.net/manga/",
-		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
+		// NSFW handling: "off" no filtering | "blur" blur covers | "hide" hide entries
 		nsfw: "hide",
 	},
 
-	// ── 图像优化配置 ──────────────────────────────────
-	// 图像优化压缩只保留avif或webp
-	// 响应式图像是为在不同设备上提高性能而调整的图像。这些图像可以调整大小以适应其容器，并且可以根据访问者的屏幕尺寸和分辨率以不同的大小提供。
-	// Astro 仅能对 src 目录下的图像进行优化，src 目录下的图像越多，构建时间会越长
-	// Astro 图像文档 https://docs.astro.build/zh-cn/guides/images/
+	// ── Image optimization ──────────────────────────────────
+	// Optimized images are output as AVIF and/or WebP only
+	// Responsive images are resized to fit their container and served at different sizes depending on the visitor's screen size and resolution.
+	// Astro can only optimize images under src/; the more images there, the longer the build
+	// Astro image docs: https://docs.astro.build/en/guides/images/
 	imageOptimization: {
-		// 输出图片格式
-		// - "avif": 仅输出 AVIF 格式（最新技术，最小体积，目前兼容性较低，构建时间较长）
-		// - "webp": 仅输出 WebP 格式（体积适中，兼容性好，构建时间短）
-		// - "both": 同时输出 AVIF 和 WebP（浏览器自动选择最佳格式）
+		// Output format
+		// - "avif": AVIF only (smallest files, lower compatibility, slower builds)
+		// - "webp": WebP only (medium size, good compatibility, fast builds)
+		// - "both": AVIF and WebP (the browser picks the best one)
 		formats: "webp",
-		// 图片压缩质量 (1-100)，值越低体积越小但质量越差，推荐 70-85
+		// Compression quality (1-100); lower is smaller but worse. 70-85 recommended
 		quality: 85,
-		// 为特定域名的图片添加 referrerpolicy="no-referrer" 属性
-		// 支持通配符 *，例如：["i0.hdslb.com", "*.bilibili.com"]
-		// 可解决指定域名图片加载时的 403 问题（如防盗链图片）
+		// Add referrerpolicy="no-referrer" to images from these domains
+		// Wildcards (*) are supported, e.g. ["i0.hdslb.com", "*.bilibili.com"]
+		// Fixes 403 errors from hotlink-protected image hosts
 		noReferrerDomains: [
 			"*.hdslb.com",
 			"*.bilibili.com",
@@ -339,17 +339,17 @@ export const siteConfig: SiteConfig = {
 		],
 	},
 
-	// ── 订阅 (RSS / Atom) 配置 ──────────────────────────────────
+	// ── Feeds (RSS / Atom) ──────────────────────────────────
 	feed: {
-		// 订阅条目内容模式：
-		// - "full": 包含文章正文全文（默认）
-		// - "summary": 仅包含文章摘要/描述，不含正文，体积更小
+		// Feed item content:
+		// - "full": the full post body (default)
+		// - "summary": description only, no body; smaller feed
 		contentMode: "full",
 	},
 
-	// 站点语言，在本配置文件顶部SITE_LANG定义
+	// Site language, defined by SITE_LANG at the top of this file
 	lang: SITE_LANG,
 
-	// 页面开关配置，在本配置文件顶部pages定义
+	// Page switches, defined by pages at the top of this file
 	pages,
 };

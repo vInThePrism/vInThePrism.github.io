@@ -72,7 +72,7 @@ export async function fetchMalList(
 	);
 
 	if (!response.ok) {
-		throw new Error(`[MAL] 无法获取数据 (状态码: ${response.status})`);
+		throw new Error(`[MAL] Failed to fetch data (status: ${response.status})`);
 	}
 
 	const data = (await response.json()) as MalListResponse;

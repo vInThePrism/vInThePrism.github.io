@@ -1,57 +1,57 @@
 import type { MusicPlayerConfig } from "../types/musicConfig";
 
-// 音乐播放器配置
+// Music player
 export const musicPlayerConfig: MusicPlayerConfig = {
-	// 是否在导航栏显示音乐播放器入口
+	// Show the music player in the navbar
 	showInNavbar: false,
 
-	// 是否在侧边栏显示音乐播放器组件
+	// Show the music player widget in the sidebar
 	showInSidebar: false,
 
-	// 使用方式："meting" 使用 Meting API，"local" 使用本地音乐列表
+	// Source: "meting" uses the Meting API, "local" uses the local playlist below
 	mode: "local",
 
-	// 默认音量 (0-1)
+	// Default volume (0-1)
 	volume: 0.7,
 
-	// 播放模式：'list'=列表循环, 'one'=单曲循环, 'random'=随机播放
+	// Play mode: 'list' = loop the list, 'one' = loop one track, 'random' = shuffle
 	playMode: "list",
 
-	// 是否显启用歌词
+	// Show lyrics
 	showLyrics: false,
 
-	// Meting API 配置
+	// Meting API
 	meting: {
-		// Meting API 地址
-		// 默认使用官方 API，也可以使用自定义 API
+		// Meting API URL
+		// The official API by default; a custom API also works
 		api: "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r",
-		// 音乐平台：netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
+		// Platform: netease, tencent (QQ Music), kugou, xiami, baidu
 		server: "netease",
-		// 类型：song=单曲, playlist=歌单, album=专辑, search=搜索, artist=艺术家
+		// Type: song, playlist, album, search, artist
 		type: "playlist",
-		// 歌单/专辑/单曲 ID 或搜索关键词
+		// Playlist / album / song ID, or a search keyword
 		id: "10046455237",
-		// 认证 token（可选）
+		// Auth token (optional)
 		auth: "",
-		// 备用 API 配置（当主 API 失败时使用）
+		// Fallback APIs (used when the main API fails)
 		fallbackApis: [
 			"https://api.injahow.cn/meting/?server=:server&type=:type&id=:id",
 			"https://api.moeyao.cn/meting/?server=:server&type=:type&id=:id",
 		],
 	},
 
-	// 本地音乐配置（当 mode 为 'local' 时使用）
-	// 1. 支持传入歌词文件的路径
-	// lrc: "/assets/music/lrc/使一颗心免于哀伤-哼唱.lrc",
-	// 2. 或者直接填入歌词字符串内容
-	// lrc: "[00:00.00]歌词内容...",
+	// Local playlist (used when mode is 'local')
+	// 1. Pass the path of a lyrics file
+	// lrc: "/assets/music/lrc/my-song.lrc",
+	// 2. Or the lyrics text itself
+	// lrc: "[00:00.00]Lyrics...",
 	local: {
 		playlist: [
 			{
-				name: "使一颗心免于哀伤",
-				artist: "知更鸟 / HOYO-MiX / Chevy",
-				url: "/assets/music/使一颗心免于哀伤-哼唱.mp3",
-				cover: "/assets/music/cover/109951169585655912.webp",
+				name: "Example Track",
+				artist: "Unknown Artist",
+				url: "/assets/music/example.mp3",
+				cover: "/assets/music/cover/example.webp",
 				lrc: "",
 			},
 		],

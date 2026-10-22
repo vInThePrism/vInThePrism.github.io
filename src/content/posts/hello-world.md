@@ -13,7 +13,7 @@ I built it to have a **slower place** for myself. My notes on GitHub are written
 
 Roughly three kinds of things will show up here:
 
-- **Learning** — notes on CUDA, the CuTe DSL, GPU architecture and distributed training. A starting set is the [CUDA Kernel Handbook](/archive/?category=Learning) series: the hand-written kernels that keep coming up in interviews, from elementwise ops to SGEMM.
+- **Learning** — notes on CUDA, the CuTe DSL, GPU architecture and distributed training.
 - **Thoughts** — technical, about learning itself, or about nothing technical at all.
 - **Life** — Madison weather, things I notice on the way, the occasional photo.
 

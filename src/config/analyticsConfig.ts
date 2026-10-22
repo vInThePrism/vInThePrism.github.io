@@ -5,45 +5,45 @@ export const analyticsConfig: AnalyticsConfig = {
 	googleAnalyticsId: "",
 	// Microsoft Clarity ID
 	microsoftClarityId: "",
-	// Umami 统计配置
+	// Umami analytics
 	umamiAnalytics: {
 		// Umami Website ID
 		websiteId: "",
-		// Umami JS地址，支持使用自建
+		// Umami script URL (self-hosted instances are supported)
 		scriptUrl: "https://cloud.umami.is/script.js",
-		// Umami 会话回放脚本地址，支持使用自建
+		// Umami session-replay script URL (self-hosted instances are supported)
 		replaysScriptUrl: "https://cloud.umami.is/recorder.js",
-		// 是否追踪出站链接
+		// Track outbound links
 		trackOutboundLinks: true,
-		// 是否收集浏览器性能指标
+		// Collect browser performance metrics
 		collectWebVitals: false,
-		// 会话回放配置
+		// Session replay
 		replays: {
-			// 是否启用会话回放
+			// Enable session replay
 			enabled: false,
-			// 录制会话采样率，范围 0-1，例如 0.15 表示记录 15% 的会话
+			// Sampling rate for recorded sessions, 0-1 (e.g. 0.15 records 15% of sessions)
 			sampleRate: 0.15,
-			// 隐私遮罩级别："moderate" 会遮罩所有输入框；"strict" 额外遮罩页面全部文本
+			// Privacy masking: "moderate" masks all inputs; "strict" also masks all page text
 			maskLevel: "moderate",
-			// 单次录制最大时长（毫秒）
+			// Maximum length of one recording (ms)
 			maxDuration: 300000,
-			// 需要排除录制的元素 CSS 选择器，例如 ".sensitive-widget"
+			// CSS selectors to exclude from recording, e.g. ".sensitive-widget"
 			blockSelector: "",
 		},
 	},
-	// 51la 统计配置
+	// 51la analytics
 	la51Analytics: {
-		// 51la 统计 ID
+		// 51la site ID
 		Id: "",
-		// 自定义 SDK JS 地址，防止 DNS 污染，留空使用默认地址
+		// Custom SDK URL (to avoid DNS pollution); leave empty for the default
 		sdkUrl: "",
-		// 多个统计 ID 的数据分离标识，留空则使用 Id
+		// Data-separation key for multiple site IDs; leave empty to use Id
 		ck: "",
-		// 是否开启事件分析功能
+		// Enable event analytics
 		autoTrack: false,
-		//  Hash路由模式, 项目使用History API路由, 所以不必开启默认false
+		// Hash-router mode. This site uses History API routing, so leave it off (default false)
 		hashMode: false,
-		// 是否开启网站录屏功能
+		// Enable screen recording
 		screenRecord: true,
 	},
 };

@@ -6,17 +6,36 @@ Built with [Astro](https://astro.build) and the [Firefly](https://github.com/Cut
 
 ---
 
-## ✍️ Publishing
+## ✍️ Publishing, editing and deleting
+
+### In the browser (recommended)
+
+| Editor | Edits | URL |
+|---|---|---|
+| **Site editor** | Posts (Learning / Thoughts / Life), Updates, Projects, the About page | https://vintheprism.github.io/admin/ |
+| **Notes editor** | Notes in [`vInThePrism/notes`](https://github.com/vInThePrism/notes), which feed the *Learning* section | https://vintheprism.github.io/admin/notes/ |
+
+Both are [Sveltia CMS](https://github.com/sveltia/sveltia-cms): you can create, edit and delete entries, upload images, and preview Markdown. Every save is a commit, so nothing is lost and anything can be reverted from the git history.
+
+**One-time sign-in setup**
+
+1. Open the editor and click **Sign In with Token**. It links to GitHub's token page.
+2. Create a *fine-grained* token: *Repository access* → *Only select repositories* → `vInThePrism.github.io` **and** `vInThePrism/notes`; *Permissions* → *Contents: Read and write*.
+3. Paste the token. It's stored only in that browser; nobody else can sign in without write access to your repos.
+
+Site edits go live about two minutes after saving. Notes appear on the next daily rebuild, or right away if you run *Actions → Deploy to GitHub Pages → Run workflow*.
+
+### Other ways
 
 | What | Where | Minimum frontmatter |
 |---|---|---|
-| **Study notes** | Push to [`vInThePrism/notes`](https://github.com/vInThePrism/notes) — synced daily (or trigger manually, see below) | None. The title comes from the first `#` heading, the date from the git history |
-| **Longer posts** | `src/content/posts/xxx.md` | `title`, `published`, `category: Learning` / `Thoughts` / `Life` |
-| **Short updates** | `src/content/dynamic/2026-10-22-xxx.md` | `published: 2026-10-22 20:00:00` |
-| **Photo albums** | Images in `public/gallery/<album-id>/`, then add an entry in `src/config/galleryConfig.ts` | — |
-| **Projects** | `src/content/projects/xxx.md` | `title`, `published` (GitHub repos appear on the Projects page automatically) |
+| **Study notes** | Push to `vInThePrism/notes` | None. Title from the first `#` heading, date from git |
+| **Posts** | `src/content/posts/xxx.md` | `title`, `published`, `category: Learning` / `Thoughts` / `Life` |
+| **Updates** | `src/content/dynamic/2026-10-22-xxx.md` | `published: 2026-10-22 20:00:00` |
+| **Photo albums** | Images in `public/gallery/<album-id>/`, plus an entry in `src/config/galleryConfig.ts` | — |
+| **Projects** | `src/content/projects/xxx.md` | `title`, `published` |
 
-Full post template:
+Post template:
 
 ```markdown
 ---
@@ -25,23 +44,15 @@ published: 2026-10-22
 description: One-line summary shown in the post list
 category: Thoughts      # Learning / Thoughts / Life
 tags: [CUDA, Essay]
-image: ./cover.webp     # optional cover image next to the post
+image: ./cover.webp     # optional cover image
 pinned: false
-draft: false            # true = not published
-series: ""              # optional: group posts into a series
-seriesOrder: 1
+draft: false            # true = hidden from the site
 ---
 
 Body…
 ```
 
-**Three easy ways to post**
-
-1. **GitHub web UI**: open `src/content/posts/` → *Add file* → *Create new file*, paste the template, commit. Live in about two minutes.
-2. **Phone**: the same flow in the GitHub mobile app.
-3. **Locally**: `pnpm new-post my-post`, write, `git push`.
-
-Markdown extras: callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`), math (`$...$`, `$$...$$`), Mermaid diagrams, and GitHub repo cards (`::github{repo="vInThePrism/notes"}`).
+To delete something without the editor, delete the file on GitHub (or locally and push). Markdown extras: callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`), math (`$...$`, `$$...$$`), Mermaid diagrams, and GitHub repo cards (`::github{repo="vInThePrism/notes"}`).
 
 ---
 
@@ -122,4 +133,4 @@ NOTES_DIR=../notes pnpm build    # full build including a local clone of the not
 
 ---
 
-Theme: [Firefly](https://github.com/CuteLeaf/Firefly) by CuteLeaf, based on [Fuwari](https://github.com/saicaca/fuwari), MIT License. The *CUDA Kernel Handbook* series is adapted from [Tongkaio/CUDA_Kernel_Samples](https://github.com/Tongkaio/CUDA_Kernel_Samples) (MIT License).
+Theme: [Firefly](https://github.com/CuteLeaf/Firefly) by CuteLeaf, based on [Fuwari](https://github.com/saicaca/fuwari), MIT License.

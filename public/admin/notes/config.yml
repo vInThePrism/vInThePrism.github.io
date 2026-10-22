@@ -1,0 +1,61 @@
+# Notes editor (https://vintheprism.github.io/admin/notes/)
+# Edits the vInThePrism/notes repository. The site picks notes up on its next build
+# (daily at 8 AM Chicago, or run the "Deploy to GitHub Pages" workflow manually).
+#
+# Every field except the body is optional:
+#   - Title empty     -> the first "# Heading" in the body is used
+#   - Published empty -> the date of the file's first git commit is used
+#   - Tags empty      -> the folder name is used (gpu -> GPU)
+#
+# To add a topic folder, copy one of the collection blocks below and change
+# name, label and folder.
+
+backend:
+  name: github
+  repo: vInThePrism/notes
+  branch: main
+  commit_messages:
+    create: "notes: create {{collection}}/{{slug}}"
+    update: "notes: update {{collection}}/{{slug}}"
+    delete: "notes: delete {{collection}}/{{slug}}"
+    uploadMedia: "notes: upload {{path}}"
+    deleteMedia: "notes: delete {{path}}"
+
+site_url: https://vintheprism.github.io
+display_url: https://vintheprism.github.io
+
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: gpu
+    label: GPU
+    label_singular: GPU note
+    folder: gpu
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields: &note_fields
+      - { name: title, label: Title, widget: string, required: false, hint: "Becomes the file name for new notes. On existing notes, leave empty to use the first # heading." }
+      - { name: published, label: Published, widget: datetime, type: date, picker_utc: true, required: false, hint: "Leave empty to use the first commit date." }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: tags, label: Tags, widget: list, required: false, hint: "Leave empty to use the folder name." }
+      - { name: draft, label: Draft (hidden from the site), widget: boolean, required: false, default: false }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: ml
+    label: ML
+    label_singular: ML note
+    folder: ml
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields: *note_fields

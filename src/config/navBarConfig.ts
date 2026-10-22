@@ -6,17 +6,17 @@ import {
 } from "../types/navBarConfig";
 
 // ============================================================================
-// 导航栏配置 - 根据顺序动态生成导航栏链接
+// Navbar - links are generated in this order
 // NavBar Configuration - Dynamically generate navigation bar links based on order
 // ============================================================================
 const getDynamicNavBarConfig = (): NavBarConfig => {
-	// 基础导航栏链接
+	// Base links
 	const links: NavBarLink[] = [];
 
-	// 主页
+	// Home
 	links.push(LinkPresets.Home);
 
-	// 文章及其子菜单
+	// Sections
 	links.push({
 		name: "Learning",
 		url: "/archive/?category=Learning",
@@ -58,85 +58,85 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	return { links } as NavBarConfig;
 };
 
-// 导航搜索配置
+// Navbar search
 export const navBarSearchConfig: NavBarSearchConfig = {
 	method: NavBarSearchMethod.PageFind,
 };
 
 // ============================================================================
-// 链接预设 - 可自由自定义导航栏链接的名称、图标和URL
+// Link presets - customize the name, icon and URL of each navbar link
 // Link Presets - Allows free customization of the name, icon, and URL of navigation bar links
 // ============================================================================
 export const LinkPresets: Record<string, NavBarLink> = {
 	Home: {
-		name: "主页",
+		name: "Home",
 		url: "/",
 		icon: "material-symbols:home",
 	},
 	Archive: {
-		name: "归档",
+		name: "Archive",
 		url: "/archive/",
 		icon: "material-symbols:archive",
 	},
 	Categories: {
-		name: "分类",
+		name: "Categories",
 		url: "/categories/",
 		icon: "material-symbols:folder-open-rounded",
 	},
 	Tags: {
-		name: "标签",
+		name: "Tags",
 		url: "/tags/",
 		icon: "material-symbols:tag-rounded",
 	},
 	Series: {
-		name: "系列",
+		name: "Series",
 		url: "/series/",
 		icon: "material-symbols:layers",
 	},
 	Friends: {
-		name: "友链",
+		name: "Friends",
 		url: "/friends/",
 		icon: "material-symbols:link-2-rounded",
 		pageKey: "friends",
 	},
 	Guestbook: {
-		name: "留言",
+		name: "Guestbook",
 		url: "/guestbook/",
 		icon: "material-symbols:chat",
 		pageKey: "guestbook",
 	},
 	Dynamic: {
-		name: "动态",
+		name: "Updates",
 		url: "/dynamic/",
 		icon: "material-symbols:forum-rounded",
 		pageKey: "dynamic",
 	},
 	Projects: {
-		name: "项目",
+		name: "Projects",
 		url: "/projects/",
 		icon: "material-symbols:rocket-launch",
 		pageKey: "projects",
 	},
 	Gallery: {
-		name: "相册",
+		name: "Gallery",
 		url: "/gallery/",
 		icon: "material-symbols:photo-library",
 		pageKey: "gallery",
 	},
 	Booknav: {
-		name: "书签导航",
+		name: "Bookmarks",
 		url: "/booknav/",
 		icon: "material-symbols:bookmarks",
 		pageKey: "booknav",
 	},
 	Bilibili: {
-		name: "哔哩哔哩",
+		name: "Bilibili",
 		url: "/bilibili/",
 		icon: "fa7-brands:bilibili",
 		pageKey: "bilibili",
 	},
 	Bangumi: {
-		name: "番组计划",
+		name: "Bangumi",
 		url: "/bangumi/",
 		icon: "material-symbols:movie",
 		pageKey: "bangumi",
@@ -154,13 +154,13 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		pageKey: "mal",
 	},
 	Sponsor: {
-		name: "打赏",
+		name: "Sponsor",
 		url: "/sponsor/",
 		icon: "material-symbols:favorite",
 		pageKey: "sponsor",
 	},
 	About: {
-		name: "关于我",
+		name: "About",
 		url: "/about/",
 		icon: "material-symbols:person",
 	},

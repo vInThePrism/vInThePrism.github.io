@@ -283,7 +283,7 @@ function registerSwupHooks(): void {
 				});
 				document.dispatchEvent(pageLoadedEvent);
 				console.log(
-					"Layout: 触发 firefly:page:loaded 事件，路径:",
+					"Layout: fired firefly:page:loaded, path:",
 					window.location.pathname,
 				);
 			}

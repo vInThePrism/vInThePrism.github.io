@@ -390,7 +390,7 @@ const managerConfigStr = JSON.stringify({
             tryPlayCurrentTrackUrl(true, ver);
         } else {
             state.error = 'Audio playback error';
-            emit('fm:error', { message: '播放失败，即将自动跳过...' });
+            emit('fm:error', { message: 'Playback failed, skipping to the next track...' });
 
             if (errorSkipTimeout) clearTimeout(errorSkipTimeout);
             errorSkipTimeout = setTimeout(function () {

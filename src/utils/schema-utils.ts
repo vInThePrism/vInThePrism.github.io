@@ -26,7 +26,7 @@ export function toAbsoluteUrl(
 	// 这类资源应改用 toAbsoluteImageUrl。
 	if (!src.startsWith("/")) {
 		console.warn(
-			`[schema-utils] toAbsoluteUrl 收到 src 相对路径 "${src}"，无法解析成可访问 URL，已跳过；请改用 toAbsoluteImageUrl`,
+			`[schema-utils] toAbsoluteUrl got a relative src "${src}" that cannot be resolved to a URL; skipped. Use toAbsoluteImageUrl instead`,
 		);
 		return null;
 	}

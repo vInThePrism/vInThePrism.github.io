@@ -1,25 +1,25 @@
 import type { ProfileConfig } from "../types/profileConfig";
 
 export const profileConfig: ProfileConfig = {
-	// 头像
-	// 图片路径支持三种格式：
-	// 1. public 目录（以 "/" 开头，不优化）："/assets/images/avatar.webp"
-	// 2. src 目录（不以 "/" 开头，自动优化但会增加构建时间，推荐）："assets/images/avatar.webp"
-	// 3. 远程 URL："https://example.com/avatar.jpg"
+	// Avatar
+	// Image paths can be:
+	// 1. In public/ (starts with "/", not optimized): "/assets/images/avatar.webp"
+	// 2. In src/ (no leading "/", optimized but slower to build, recommended): "assets/images/avatar.webp"
+	// 3. A remote URL: "https://example.com/avatar.jpg"
 	avatar: "https://github.com/vInThePrism.png",
 
-	// 名字
+	// Name
 	name: "V",
 
-	// 个人签名
+	// Bio
 	bio: "CS @ UW-Madison · learning AI infra & GPU kernels · notes, thoughts and life",
 
-	// 链接配置
-	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons
-	// 访问https://icones.js.org/ 获取图标代码，
-	// 如果想使用尚未包含相应的图标集，则需要安装它
+	// Links
+	// Preinstalled icon sets: fa7-brands, fa7-regular, fa7-solid, material-symbols, simple-icons
+	// Find icon names at https://icones.js.org/
+	// Other icon sets need to be installed first
 	// `pnpm add @iconify-json/<icon-set-name>`
-	// showName: true 时显示图标和名称，false 时只显示图标
+	// showName: true shows the icon and the name; false shows the icon only
 	links: [
 		{
 			name: "GitHub",

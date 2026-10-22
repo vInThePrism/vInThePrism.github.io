@@ -1,36 +1,36 @@
 import type { CoverImageConfig } from "../types/coverImageConfig";
 
 /**
- * 文章封面图配置
+ * Post cover image settings
  *
- * enableInPost - 是否在文章详情页显示封面图
- * enableInPostOverlay - 是否使用标题和元数据叠加在封面上的布局
- * showLoading - 是否显示封面图加载动画
+ * enableInPost - show the cover image on the post page
+ * enableInPostOverlay - overlay the title and metadata on top of the cover
+ * showLoading - show a loading animation for the cover image
  *
- * 随机封面图使用说明：
- * 1. 在文章的 Frontmatter 中添加 image: "api" 即可使用随机图功能
- * 2. 系统会依次尝试所有配置的 API，全部失败后保留 LQIP 并显示错误提示
+ * Random cover images:
+ * 1. Add image: "api" to a post's frontmatter to use a random cover
+ * 2. Each configured API is tried in order; if all fail, the LQIP stays and an error is shown
  *
- * // 文章 Frontmatter 示例：
+ * // Example post frontmatter:
  * ---
- * title: 文章标题
+ * title: Post title
  * image: "api"
  * ---
  */
 export const coverImageConfig: CoverImageConfig = {
-	// 是否在文章详情页显示封面图
+	// Show the cover image on the post page
 	enableInPost: true,
 
-	// 是否使用标题和元数据叠加在封面上的布局
+	// Overlay the title and metadata on top of the cover
 	enableInPostOverlay: false,
 
-	// 是否显示转圈圈加载动画，会替代掉LQIP
+	// Show a spinner while loading (replaces the LQIP placeholder)
 	showLoading: false,
 
 	randomCoverImage: {
-		// 随机封面图功能开关
+		// Enable random cover images
 		enable: false,
-		// 封面图API列表
+		// Cover image API list
 		apis: [
 			"https://t.alcy.cc/pc",
 			"https://www.dmoe.cc/random.php",

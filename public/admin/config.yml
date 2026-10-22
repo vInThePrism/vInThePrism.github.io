@@ -1,0 +1,110 @@
+# Site editor (https://vintheprism.github.io/admin/)
+# Sveltia CMS reads and commits files in this repository through the GitHub API.
+# Every save is a commit to main, which redeploys the site (about 2 minutes).
+# Docs: https://sveltiacms.app/en/docs
+
+backend:
+  name: github
+  repo: vInThePrism/vInThePrism.github.io
+  branch: main
+  commit_messages:
+    create: "content: create {{collection}} “{{slug}}”"
+    update: "content: update {{collection}} “{{slug}}”"
+    delete: "content: delete {{collection}} “{{slug}}”"
+    uploadMedia: "content: upload “{{path}}”"
+    deleteMedia: "content: delete “{{path}}”"
+
+site_url: https://vintheprism.github.io
+display_url: https://vintheprism.github.io
+
+# Images uploaded from the editor
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    description: Learning notes, thoughts and life posts.
+    folder: src/content/posts
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{category}} · {{published}}"
+    sortable_fields: [published, title, category]
+    view_filters:
+      - { label: Learning, field: category, pattern: Learning }
+      - { label: Thoughts, field: category, pattern: Thoughts }
+      - { label: Life, field: category, pattern: Life }
+      - { label: Drafts, field: draft, pattern: true }
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: published, label: Published, widget: datetime, type: date, picker_utc: true, default: "{{now}}" }
+      - { name: description, label: Description, widget: text, required: false, hint: "One-line summary shown in the post list." }
+      - { name: category, label: Category, widget: select, options: [Learning, Thoughts, Life], default: Thoughts }
+      - { name: tags, label: Tags, widget: list, required: false, default: [] }
+      - { name: image, label: Cover image, widget: image, required: false }
+      - { name: pinned, label: Pinned, widget: boolean, required: false, default: false }
+      - { name: draft, label: Draft (hidden from the site), widget: boolean, required: false, default: false }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: updates
+    label: Updates
+    label_singular: Update
+    description: Short posts for the Updates page.
+    folder: src/content/dynamic
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    identifier_field: published
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}{{second}}"
+    summary: "{{published}} — {{body}}"
+    sortable_fields: [published]
+    fields:
+      - { name: published, label: Published, widget: datetime, format: "YYYY-MM-DD HH:mm:ss", default: "{{now}}" }
+      - { name: location, label: Location, widget: string, required: false }
+      - { name: pinned, label: Pinned, widget: boolean, required: false, default: false }
+      - { name: body, label: Text, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    description: Hand-written project cards. Public GitHub repos are listed automatically below them.
+    folder: src/content/projects
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{status}}"
+    sortable_fields: [order, published, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: published, label: Date, widget: datetime, type: date, picker_utc: true, default: "{{now}}" }
+      - { name: order, label: Order (higher shows first), widget: number, value_type: int, required: false }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: status, label: Status, widget: select, options: [planning, developing, published, archived], default: developing }
+      - { name: tags, label: Tags, widget: list, required: false, default: [] }
+      - { name: image, label: Cover image, widget: image, required: false }
+      - name: link
+        label: Links
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Label, widget: string }
+          - { name: icon, label: Icon (e.g. fa7-brands:github), widget: string, required: false }
+          - { name: value, label: URL, widget: string }
+      - { name: body, label: README, widget: markdown, required: false }
+
+  - name: pages
+    label: Pages
+    files:
+      - name: about
+        label: About
+        file: src/content/spec/about.md
+        format: raw
+        fields:
+          - { name: body, label: Body, widget: markdown }
