@@ -1,0 +1,84 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 推送到 main 分支时自动构建部署
+  push:
+    branches: [main]
+  # 每天自动重建一次，同步笔记仓库和 GitHub 仓库列表（UTC 13:17 ≈ 芝加哥早上 8 点）
+  schedule:
+    - cron: "17 13 * * *"
+  # 在 Actions 页面手动点 "Run workflow"
+  workflow_dispatch:
+  # 笔记仓库 push 后可以通过 API 触发立即重建（见 README）
+  repository_dispatch:
+    types: [notes-updated]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v7
+
+      # 拉取笔记仓库。它是私有仓库，需要在本仓库 Settings → Secrets 里配置 NOTES_TOKEN
+      # （对 vInThePrism/notes 有 Contents: Read 权限的 fine-grained token）。
+      # 如果笔记仓库改成公开，就不需要这个 secret 了。拉取失败不会让部署失败。
+      - name: Checkout notes
+        id: notes
+        continue-on-error: true
+        uses: actions/checkout@v7
+        with:
+          repository: vInThePrism/notes
+          path: .notes
+          fetch-depth: 0
+          token: ${{ secrets.NOTES_TOKEN || github.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.22.0
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site
+        run: pnpm run build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_USER: vInThePrism
+          NOTES_DIR: ${{ steps.notes.outcome == 'success' && format('{0}/.notes', github.workspace) || '' }}
+
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+          include-hidden-files: true
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
