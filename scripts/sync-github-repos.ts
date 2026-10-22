@@ -1,10 +1,10 @@
 /**
- * 构建时从 GitHub 拉取公开仓库列表，写入 src/constants/github-repos.json，
- * 供「项目」页底部的 GitHub 仓库区块使用。
+ * Fetch public repos from GitHub at build time and write them to
+ * src/constants/github-repos.json for the GitHub section on the Projects page.
  *
- * - 用户名来自 GITHUB_USER 环境变量，默认 vInThePrism
- * - 在 GitHub Actions 里会自动带上 GITHUB_TOKEN，避免匿名限流
- * - 拉取失败时保留已有的 JSON，不会让构建失败
+ * - User comes from GITHUB_USER (default: vInThePrism)
+ * - Uses GITHUB_TOKEN when present (set automatically in GitHub Actions)
+ * - On failure the existing JSON is kept, so the build never breaks
  */
 import fs from "node:fs/promises";
 
@@ -58,7 +58,7 @@ async function main(): Promise<void> {
 		const raw = (await res.json()) as RawRepo[];
 		const repos: GithubRepo[] = raw
 			.filter((r) => !r.private && !r.archived)
-			// 不展示网站仓库自身
+			// Hide the site repo itself
 			.filter((r) => r.name.toLowerCase() !== `${USER}.github.io`.toLowerCase())
 			.map((r) => ({
 				name: r.name,

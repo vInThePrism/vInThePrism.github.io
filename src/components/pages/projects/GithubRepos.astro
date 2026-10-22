@@ -1,8 +1,8 @@
 ---
 /**
- * 「项目」页底部：从 GitHub 自动同步的公开仓库列表。
- * 数据由 scripts/sync-github-repos.ts 在构建时写入 src/constants/github-repos.json，
- * GitHub Actions 每天定时重建一次，所以这里会自动跟上你在 GitHub 上的更新。
+ * Bottom of the Projects page: public repos synced from GitHub.
+ * Data is written to src/constants/github-repos.json by scripts/sync-github-repos.ts at build time;
+ * GitHub Actions rebuilds daily, so this list keeps up with GitHub automatically.
  */
 import { Icon } from "astro-icon/components";
 import data from "@/constants/github-repos.json";
@@ -45,15 +45,19 @@ const langColor: Record<string, string> = {
 function relTime(iso: string): string {
 	if (!iso) return "";
 	const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
-	if (days < 1) return "今天";
-	if (days < 30) return `${days} 天前`;
-	if (days < 365) return `${Math.floor(days / 30)} 个月前`;
-	return `${Math.floor(days / 365)} 年前`;
+	if (days < 1) return "today";
+	if (days < 30) return `${days} day${days === 1 ? "" : "s"} ago`;
+	if (days < 365) {
+		const m = Math.floor(days / 30);
+		return `${m} month${m === 1 ? "" : "s"} ago`;
+	}
+	const y = Math.floor(days / 365);
+	return `${y} year${y === 1 ? "" : "s"} ago`;
 }
 
 const groups = [
-	{ title: "我的仓库", icon: "fa7-brands:github", items: own },
-	{ title: "参与贡献的 Fork", icon: "material-symbols:fork-right", items: forks },
+	{ title: "My Repositories", icon: "fa7-brands:github", items: own },
+	{ title: "Forks I Contribute To", icon: "material-symbols:fork-right", items: forks },
 ].filter((g) => g.items.length > 0);
 ---
 
@@ -76,7 +80,7 @@ const groups = [
 							rel="noopener noreferrer"
 							class="text-sm text-(--primary) hover:underline"
 						>
-							在 GitHub 查看全部 →
+							View all on GitHub →
 						</a>
 					</div>
 					<div class="grid gap-3 grid-cols-1 md:grid-cols-2">
@@ -97,7 +101,7 @@ const groups = [
 									</span>
 								</div>
 								<p class="text-sm text-black/55 dark:text-white/55 line-clamp-2 min-h-[2.5em]">
-									{r.description || "（暂无描述）"}
+									{r.description || "No description yet."}
 								</p>
 								<div class="flex items-center gap-4 text-xs text-black/45 dark:text-white/45 mt-auto">
 									{r.language && (
@@ -115,7 +119,7 @@ const groups = [
 											{r.stars}
 										</span>
 									)}
-									<span class="ml-auto">更新于 {relTime(r.pushedAt)}</span>
+									<span class="ml-auto">Updated {relTime(r.pushedAt)}</span>
 								</div>
 							</a>
 						))}
@@ -124,7 +128,7 @@ const groups = [
 			))}
 			{data.updatedAt && (
 				<p class="text-xs text-center text-black/35 dark:text-white/35">
-					仓库列表自动同步自 GitHub · 上次同步 {data.updatedAt.slice(0, 10)}
+					Synced automatically from GitHub · last sync {data.updatedAt.slice(0, 10)}
 				</p>
 			)}
 		</section>

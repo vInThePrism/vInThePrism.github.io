@@ -12,7 +12,7 @@ export const profileConfig: ProfileConfig = {
 	name: "V",
 
 	// 个人签名
-	bio: "UW-Madison CS · AI Infra / GPU kernel 学习中 · 在这里记录学习、思考和生活",
+	bio: "CS @ UW-Madison · learning AI infra & GPU kernels · notes, thoughts and life",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons

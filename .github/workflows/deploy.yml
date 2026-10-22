@@ -1,15 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  # 推送到 main 分支时自动构建部署
+  # Build and deploy on every push to main
   push:
     branches: [main]
-  # 每天自动重建一次，同步笔记仓库和 GitHub 仓库列表（UTC 13:17 ≈ 芝加哥早上 8 点）
+  # Daily rebuild to sync notes and the GitHub repo list (13:17 UTC ≈ 8 AM Chicago)
   schedule:
     - cron: "17 13 * * *"
-  # 在 Actions 页面手动点 "Run workflow"
+  # Manual "Run workflow" button on the Actions tab
   workflow_dispatch:
-  # 笔记仓库 push 后可以通过 API 触发立即重建（见 README）
+  # Lets the notes repo trigger an immediate rebuild via the API (see README)
   repository_dispatch:
     types: [notes-updated]
 
@@ -29,9 +29,9 @@ jobs:
       - name: Checkout site
         uses: actions/checkout@v7
 
-      # 拉取笔记仓库。它是私有仓库，需要在本仓库 Settings → Secrets 里配置 NOTES_TOKEN
-      # （对 vInThePrism/notes 有 Contents: Read 权限的 fine-grained token）。
-      # 如果笔记仓库改成公开，就不需要这个 secret 了。拉取失败不会让部署失败。
+      # Check out the notes repo. While it is private, add a NOTES_TOKEN secret
+      # (fine-grained token with Contents: Read on vInThePrism/notes).
+      # Not needed once the notes repo is public. A failure here never blocks the deploy.
       - name: Checkout notes
         id: notes
         continue-on-error: true

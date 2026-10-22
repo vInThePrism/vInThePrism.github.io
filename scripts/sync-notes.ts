@@ -1,21 +1,23 @@
 /**
- * 把笔记仓库（默认 vInThePrism/notes）里的 Markdown 同步成网站「学习」分类下的文章。
+ * Sync Markdown from the notes repo (default: vInThePrism/notes) into the site's
+ * "Learning" category.
  *
- * 用法：NOTES_DIR=/path/to/notes npx tsx scripts/sync-notes.ts
- * GitHub Actions 会先 checkout 笔记仓库，再设置 NOTES_DIR 运行本脚本。
- * 没有设置 NOTES_DIR 或目录不存在时直接跳过，不影响构建。
+ * Usage: NOTES_DIR=/path/to/notes npx tsx scripts/sync-notes.ts
+ * GitHub Actions checks out the notes repo first and sets NOTES_DIR.
+ * If NOTES_DIR is unset or missing, the script is a no-op and the build continues.
  *
- * 规则：
- * - 每个 .md 生成 src/content/posts/notes/<相对路径>.md（该目录已加入 .gitignore）
- * - 已有 frontmatter（含 title 和 published）的文件原样使用，只补 category
- * - 没有 frontmatter 的文件自动生成：
- *     title     ← 第一个一级标题，否则文件名
- *     published ← 该文件在 git 里首次提交的日期
- *     updated   ← 最近一次提交的日期
- *     tags      ← 所在目录名（如 gpu）
- *     category  ← 学习
- * - 文件名以 _ 开头、或位于以 _ / . 开头的目录里的文件会被跳过；根目录 README.md 也跳过
- * - 同目录下的图片等资源会一并复制，相对路径引用照常可用
+ * Rules:
+ * - Each .md becomes src/content/posts/notes/<relative path>.md (gitignored)
+ * - Files that already have frontmatter with title + published are kept as-is
+ *   (only `category` is added if missing)
+ * - Files without frontmatter get one generated:
+ *     title     <- first level-1 heading, else the file name
+ *     published <- date of the file's first git commit
+ *     updated   <- date of the latest git commit
+ *     tags      <- parent directory names (e.g. gpu -> GPU)
+ *     category  <- Learning
+ * - Skips the root README.md and anything whose name starts with "_" or "."
+ * - Images next to notes are copied too, so relative image links keep working
  */
 import { execFileSync } from "node:child_process";
 import fs from "node:fs/promises";
@@ -24,7 +26,7 @@ import path from "node:path";
 const NOTES_DIR = process.env.NOTES_DIR;
 const NOTES_REPO = process.env.NOTES_REPO || "vInThePrism/notes";
 const OUT_DIR = "src/content/posts/notes";
-const CATEGORY = "学习";
+const CATEGORY = "Learning";
 const ASSET_EXT = new Set([
 	".png",
 	".jpg",

@@ -64,7 +64,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 主页横幅副标题
 			subtitle: [
 				"Learning GPUs, one kernel at a time.",
-				"AI Infra · CUDA · 训练性能优化",
+				"AI Infra · CUDA · Training Performance",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",

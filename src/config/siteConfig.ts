@@ -4,7 +4,7 @@ import { resolveSiteLang } from "../utils/site-config-utils";
 
 // 定义站点语言
 // 语言代码，例如：'zh_CN', 'zh_TW', 'en', 'ja', 'ru', 'ko'。
-const SITE_LANG = resolveSiteLang("zh_CN");
+const SITE_LANG = resolveSiteLang("en");
 
 // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
 const pages = resolvePageToggles({
@@ -45,17 +45,17 @@ export const siteConfig: SiteConfig = {
 	title: "vInThePrism",
 
 	// 站点副标题
-	subtitle: "AI Infra · GPU · 日常",
+	subtitle: "AI Infra · GPU · Life",
 
 	// 站点 URL
 	site_url: "https://vintheprism.github.io",
 
 	// 站点描述
 	description:
-		"V 的个人网站：GPU kernel、AI Infra 训练性能优化的学习笔记，以及一些思考和日常。",
+		"V's personal site: notes on GPU kernels and AI infra training performance, plus thoughts and everyday life.",
 
 	// 站点关键词
-	keywords: ["vInThePrism", "CUDA", "GPU", "AI Infra", "学习笔记", "博客"],
+	keywords: ["vInThePrism", "CUDA", "GPU", "AI Infra", "notes", "blog"],
 
 	// 主题色
 	themeColor: {
@@ -126,7 +126,7 @@ export const siteConfig: SiteConfig = {
 
 	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
-	timezone: "America/Chicago",
+	timezone: "UTC",
 
 	// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
 

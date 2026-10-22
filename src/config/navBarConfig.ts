@@ -18,25 +18,25 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 	// 文章及其子菜单
 	links.push({
-		name: "学习",
-		url: "/archive/?category=%E5%AD%A6%E4%B9%A0",
+		name: "Learning",
+		url: "/archive/?category=Learning",
 		icon: "material-symbols:school-rounded",
 	});
 
 	links.push({
-		name: "思考",
-		url: "/archive/?category=%E6%80%9D%E8%80%83",
+		name: "Thoughts",
+		url: "/archive/?category=Thoughts",
 		icon: "material-symbols:lightbulb-2-rounded",
 	});
 
 	links.push({
-		name: "生活",
+		name: "Life",
 		url: "#",
 		icon: "material-symbols:local-florist-rounded",
 		children: [
 			{
-				name: "生活随笔",
-				url: "/archive/?category=%E7%94%9F%E6%B4%BB",
+				name: "Essays",
+				url: "/archive/?category=Life",
 				icon: "material-symbols:edit-note-rounded",
 			},
 			LinkPresets.Dynamic,
@@ -45,7 +45,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	});
 
 	links.push({
-		name: "归档",
+		name: "Archive",
 		url: "#",
 		icon: "material-symbols:archive",
 		children: [LinkPresets.Archive, LinkPresets.Categories, LinkPresets.Tags],

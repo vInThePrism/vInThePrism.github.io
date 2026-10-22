@@ -1,28 +1,28 @@
-# 关于我 / About
+# About
 
-你好，我是 **V** 🌸
+Hi, I'm **V** 🌸
 
-UW-Madison 计算机科学本科在读，2027 年春季毕业，之后继续读研。我对 **AI Infra** 着迷：怎样让大模型训练跑得更快、怎样把一块 GPU 的每一分算力榨出来。
+I'm a Computer Science undergrad at UW-Madison, graduating in spring 2027 and heading into a master's program afterwards. I'm fascinated by **AI infrastructure**: how to make large-model training run faster, and how to squeeze every last FLOP out of a GPU.
 
-## 🛠️ 我在做什么
+## 🛠️ What I work on
 
-- **训练性能优化**：在快手 ML Infra 实习期间，做大模型 SFT 训练的 MFU 优化、FlashAttention 集成，以及 MoE 模型在多卡 H200 集群上的性能调优
-- **GPU kernel**：正在系统学习 CUDA C++ 与 CuTe DSL，从 reduce、softmax 一路写到 GEMM 和 FlashAttention
-- **开源**：在给训练侧的 AI Infra 项目提 PR
+- **Training performance** — As an ML Infra intern at Kuaishou, I worked on MFU optimization for LLM supervised fine-tuning, FlashAttention integration, and performance tuning for MoE models on multi-GPU H200 clusters.
+- **GPU kernels** — I'm working through CUDA C++ and the CuTe DSL systematically, from reduce and softmax all the way up to GEMM and FlashAttention.
+- **Open source** — Contributing PRs to training-side AI infra projects.
 
-## 📚 这个网站有什么
+## 📚 What you'll find here
 
-| 栏目 | 内容 |
+| Section | What's in it |
 |---|---|
-| **学习** | GPU / CUDA / 深度学习系统的学习笔记，自动同步自我的笔记仓库 |
-| **思考** | 关于技术、学习方法和其他事情的一些想法 |
-| **生活** | 日常碎碎念、照片和随笔 |
-| **项目** | 我在 GitHub 上的仓库，每天自动同步 |
+| **Learning** | Notes on GPUs, CUDA and deep-learning systems — partly synced automatically from my notes repo |
+| **Thoughts** | Ideas about tech, learning, and everything else |
+| **Life** | Everyday notes, photos and short essays |
+| **Projects** | My GitHub repositories, synced daily |
 
-## 📮 找到我
+## 📮 Find me
 
-- GitHub：[@vInThePrism](https://github.com/vInThePrism)
+- GitHub: [@vInThePrism](https://github.com/vInThePrism)
 
 ---
 
-*本站使用 [Astro](https://astro.build) 构建，主题是 [Firefly](https://github.com/CuteLeaf/Firefly)（基于 [Fuwari](https://github.com/saicaca/fuwari)），托管在 GitHub Pages。谢谢你来看看！*
+*Built with [Astro](https://astro.build) using the [Firefly](https://github.com/CuteLeaf/Firefly) theme (based on [Fuwari](https://github.com/saicaca/fuwari)), hosted on GitHub Pages. Thanks for stopping by!*

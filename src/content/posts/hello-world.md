@@ -1,23 +1,23 @@
 ---
-title: 你好，世界 🌸
+title: Hello, World 🌸
 published: 2026-10-22
-description: 小站开张。这里会放我的学习笔记、一些思考，还有生活里的小事。
-tags: [随笔]
-category: 思考
+description: The site is open. This is where my study notes, a few thoughts, and small things from everyday life will live.
+tags: [Essay]
+category: Thoughts
 pinned: true
 ---
 
-小站开张啦。
+The site is open!
 
-建这个网站，是想给自己留一个**慢一点的地方**。GitHub 上的笔记是写给"将来查资料的自己"的，碎片、直接、只有结论；而这里想多写一点为什么——为什么这个 kernel 会慢、为什么这样切分能把通信藏起来、为什么某个想法让我在路上走神了半天。
+I built it to have a **slower place** for myself. My notes on GitHub are written for "future me looking something up" — fragmented, blunt, conclusions only. Here I want to write a little more about the *why*: why a kernel is slow, why a particular sharding hides the communication, why an idea kept me distracted for half a walk home.
 
-这里大概会有三类东西：
+Roughly three kinds of things will show up here:
 
-- **学习**：CUDA、CuTe DSL、GPU 体系结构、分布式训练的笔记。这部分直接从我的笔记仓库同步过来，push 一下网站就会更新。
-- **思考**：技术上的、学习方法上的，或者和技术无关的。
-- **生活**：Madison 的天气、路上看到的东西、偶尔的照片。
+- **Learning** — notes on CUDA, the CuTe DSL, GPU architecture and distributed training. A starting set is the [CUDA Kernel Handbook](/archive/?category=Learning) series: the hand-written kernels that keep coming up in interviews, from elementwise ops to SGEMM.
+- **Thoughts** — technical, about learning itself, or about nothing technical at all.
+- **Life** — Madison weather, things I notice on the way, the occasional photo.
 
 > [!TIP]
-> 右上角可以切换亮色 / 暗色模式，也可以用搜索直接找文章。
+> Use the button in the top-right corner to switch between light and dark mode, or search to jump straight to a post.
 
-如果你也在学 GPU 编程，或者对 AI Infra 感兴趣，欢迎来 [GitHub](https://github.com/vInThePrism) 找我玩。
+If you're also learning GPU programming or care about AI infra, come say hi on [GitHub](https://github.com/vInThePrism).

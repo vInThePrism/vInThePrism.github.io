@@ -1,75 +1,77 @@
 # vInThePrism.github.io 🌸
 
-V 的个人网站：学习笔记、思考和生活。→ **https://vintheprism.github.io**
+V's personal site: study notes, thoughts and life → **https://vintheprism.github.io**
 
-基于 [Astro](https://astro.build) + [Firefly](https://github.com/CuteLeaf/Firefly) 主题，GitHub Pages 托管，push 到 `main` 后自动部署。
+Built with [Astro](https://astro.build) and the [Firefly](https://github.com/CuteLeaf/Firefly) theme, hosted on GitHub Pages. Every push to `main` deploys automatically.
 
 ---
 
-## ✍️ 怎么发内容
+## ✍️ Publishing
 
-| 想发什么 | 放在哪里 | 最少要写的 frontmatter |
+| What | Where | Minimum frontmatter |
 |---|---|---|
-| **学习笔记** | 直接 push 到 [`vInThePrism/notes`](https://github.com/vInThePrism/notes)，网站每天自动同步（也可手动触发，见下文） | 不需要，标题取第一个 `#` 标题，日期取 git 提交时间 |
-| **思考 / 生活长文** | `src/content/posts/xxx.md` | `title`、`published`、`category: 思考` 或 `category: 生活` |
-| **碎碎念（动态）** | `src/content/dynamic/2026-10-22-xxx.md` | `published: 2026-10-22 20:00:00` |
-| **相册** | 图片放 `public/gallery/<相册id>/`，再在 `src/config/galleryConfig.ts` 加一项 | — |
-| **项目** | `src/content/projects/xxx.md` | `title`、`published`（GitHub 仓库会自动出现在项目页底部，不用手写） |
+| **Study notes** | Push to [`vInThePrism/notes`](https://github.com/vInThePrism/notes) — synced daily (or trigger manually, see below) | None. The title comes from the first `#` heading, the date from the git history |
+| **Longer posts** | `src/content/posts/xxx.md` | `title`, `published`, `category: Learning` / `Thoughts` / `Life` |
+| **Short updates** | `src/content/dynamic/2026-10-22-xxx.md` | `published: 2026-10-22 20:00:00` |
+| **Photo albums** | Images in `public/gallery/<album-id>/`, then add an entry in `src/config/galleryConfig.ts` | — |
+| **Projects** | `src/content/projects/xxx.md` | `title`, `published` (GitHub repos appear on the Projects page automatically) |
 
-一篇文章的完整模板：
+Full post template:
 
 ```markdown
 ---
-title: 文章标题
+title: Post title
 published: 2026-10-22
-description: 一句话简介（显示在列表里）
-category: 思考        # 学习 / 思考 / 生活
-tags: [CUDA, 随笔]
-image: ./cover.webp   # 可选，封面图放在文章旁边
-pinned: false         # 置顶
-draft: false          # true = 不发布
+description: One-line summary shown in the post list
+category: Thoughts      # Learning / Thoughts / Life
+tags: [CUDA, Essay]
+image: ./cover.webp     # optional cover image next to the post
+pinned: false
+draft: false            # true = not published
+series: ""              # optional: group posts into a series
+seriesOrder: 1
 ---
 
-正文……
+Body…
 ```
 
-**最省事的三种发法：**
+**Three easy ways to post**
 
-1. **GitHub 网页**：在仓库里进入 `src/content/posts/` → *Add file* → *Create new file*，粘贴上面的模板，提交即发布（约 2 分钟后上线）。
-2. **手机**：用 GitHub App 同样操作。
-3. **本地**：`pnpm new-post 文件名` 生成模板，写完 `git push`。
+1. **GitHub web UI**: open `src/content/posts/` → *Add file* → *Create new file*, paste the template, commit. Live in about two minutes.
+2. **Phone**: the same flow in the GitHub mobile app.
+3. **Locally**: `pnpm new-post my-post`, write, `git push`.
 
-Markdown 里还可以用：提示块 `> [!NOTE]` / `> [!TIP]` / `> [!WARNING]`，数学公式 `$...$` / `$$...$$`，Mermaid 图，以及 GitHub 仓库卡片 `::github{repo="vInThePrism/notes"}`。
+Markdown extras: callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`), math (`$...$`, `$$...$$`), Mermaid diagrams, and GitHub repo cards (`::github{repo="vInThePrism/notes"}`).
 
 ---
 
-## 🔄 自动同步是怎么工作的
+## 🔄 How syncing works
 
-`.github/workflows/deploy.yml` 会在三种情况下重建网站：
+`.github/workflows/deploy.yml` rebuilds the site when:
 
-- push 到 `main`
-- **每天 UTC 13:17（芝加哥早上 8 点左右）定时重建**
-- 在 *Actions → Deploy to GitHub Pages → Run workflow* 手动触发
+- something is pushed to `main`
+- **every day at 13:17 UTC (about 8 AM Chicago)**
+- you click *Actions → Deploy to GitHub Pages → Run workflow*
 
-每次构建会运行：
+Each build runs:
 
-- `scripts/sync-notes.ts`：把笔记仓库的 Markdown 转成「学习」分类的文章（目录名会变成标签，如 `gpu/` → `GPU`）。根目录 `README.md`、以 `_` 或 `.` 开头的文件和目录会被跳过。
-- `scripts/sync-github-repos.ts`：通过 GitHub API 拉取公开仓库列表，显示在「项目」页底部。
+- `scripts/sync-notes.ts` — turns Markdown from the notes repo into *Learning* posts (directory names become tags, e.g. `gpu/` → `GPU`). The root `README.md` and anything starting with `_` or `.` is skipped.
+- `scripts/sync-github-repos.ts` — fetches public repos from the GitHub API for the Projects page.
 
-### ⚠️ 笔记仓库是私有的，需要一个 token
+### ⚠️ The notes repo is private and needs a token
 
-`vInThePrism/notes` 目前是私有仓库，网站构建时默认读不到它。二选一：
+The build can't read `vInThePrism/notes` while it's private. Pick one:
 
-- **把笔记仓库改成公开**（最简单）：*notes → Settings → Danger Zone → Change visibility*。
-- **保持私有，配一个只读 token**：
-  1. 打开 https://github.com/settings/personal-access-tokens/new
-  2. *Repository access* 选 *Only select repositories* → `vInThePrism/notes`
-  3. *Permissions → Contents* 选 *Read-only*，生成并复制
-  4. 本仓库 *Settings → Secrets and variables → Actions → New repository secret*，名字填 `NOTES_TOKEN`
+- **Make the notes repo public** (simplest): *notes → Settings → Danger Zone → Change visibility*.
+- **Keep it private and add a read-only token**:
+  1. Go to https://github.com/settings/personal-access-tokens/new
+  2. *Repository access* → *Only select repositories* → `vInThePrism/notes`
+  3. *Permissions → Contents* → *Read-only*; generate and copy it
+  4. In this repo: *Settings → Secrets and variables → Actions → New repository secret*, name it `NOTES_TOKEN`
 
-### 笔记 push 后想立刻更新网站（可选）
+### Rebuild immediately after pushing notes (optional)
 
-在 `vInThePrism/notes` 里加 `.github/workflows/notify-site.yml`，并给 notes 仓库配一个对本仓库有 *Contents: Read and write* 权限的 token（secret 名 `SITE_TOKEN`）：
+Add `.github/workflows/notify-site.yml` to `vInThePrism/notes`, and give the notes repo a token with *Contents: Read and write* on this repo (secret name `SITE_TOKEN`):
 
 ```yaml
 name: Notify site
@@ -86,37 +88,38 @@ jobs:
             -d '{"event_type":"notes-updated"}'
 ```
 
-不配也没关系，每天会自动同步一次。
+Without it, notes still sync once a day.
 
 ---
 
-## 🎨 改外观
+## 🎨 Customizing
 
-所有外观都在 `src/config/` 里：
+Everything lives in `src/config/`:
 
-| 想改什么 | 文件 | 字段 |
+| Change | File | Field |
 |---|---|---|
-| 主题色 | `siteConfig.ts` | `themeColor.hue`（当前 345 樱花粉） |
-| 壁纸模式 / 图片 | `backgroundWallpaper.ts` | `mode`（当前 `overlay`）、`src` |
-| 侧边栏 | `sidebarConfig.ts` | `position`（当前 `left`） |
-| 文章列表 | `siteConfig.ts` | `postListLayout.defaultMode`（`list` / `grid`） |
-| 头像、简介 | `profileConfig.ts` | |
-| 顶部导航 | `navBarConfig.ts` | |
-| 公告 | `announcementConfig.ts` | |
-| 评论（Giscus） | `commentConfig.ts` | 见 [Firefly 文档](https://docs-firefly.cuteleaf.cn/) |
+| Theme color | `siteConfig.ts` | `themeColor.hue` (currently 345, sakura pink) |
+| Site language | `siteConfig.ts` | `resolveSiteLang("en")` |
+| Wallpaper mode / image | `backgroundWallpaper.ts` | `mode` (currently `overlay`), `src` |
+| Sidebar | `sidebarConfig.ts` | `position` (currently `left`) |
+| Post list | `siteConfig.ts` | `postListLayout.defaultMode` (`list` / `grid`) |
+| Avatar, bio | `profileConfig.ts` | |
+| Top navigation | `navBarConfig.ts` | |
+| Announcement | `announcementConfig.ts` | |
+| Comments (Giscus) | `commentConfig.ts` | see the [Firefly docs](https://docs-firefly.cuteleaf.cn/) |
 
-壁纸是自己生成的樱花渐变图，在 `src/assets/images/wallpaper/`，换成任何图片都可以。
+The wallpaper is a generated sakura gradient in `src/assets/images/wallpaper/`; swap in any image you like.
 
-## 💻 本地预览
+## 💻 Local preview
 
-需要 Node.js ≥ 22 和 pnpm：
+Requires Node.js ≥ 22 and pnpm:
 
 ```bash
 pnpm install
-pnpm dev            # http://localhost:4321
-NOTES_DIR=../notes pnpm build   # 带上本地的笔记仓库完整构建
+pnpm dev                         # http://localhost:4321
+NOTES_DIR=../notes pnpm build    # full build including a local clone of the notes repo
 ```
 
 ---
 
-主题：[Firefly](https://github.com/CuteLeaf/Firefly) by CuteLeaf，基于 [Fuwari](https://github.com/saicaca/fuwari)，MIT License。
+Theme: [Firefly](https://github.com/CuteLeaf/Firefly) by CuteLeaf, based on [Fuwari](https://github.com/saicaca/fuwari), MIT License. The *CUDA Kernel Handbook* series is adapted from [Tongkaio/CUDA_Kernel_Samples](https://github.com/Tongkaio/CUDA_Kernel_Samples) (MIT License).
